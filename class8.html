@@ -1,0 +1,89 @@
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <title>Hello, WebVR! • A-Frame</title>
+
+    <meta name="description" content="Hello, WebVR! • A-Frame">
+
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+
+  </head>
+
+  <body>
+
+    
+
+    <script>
+
+    
+
+      var numberOfClicks=0;
+
+      
+
+      function alerUser(el){
+
+        
+
+        numberOfClicks++;
+
+        //console.log("HELLO . Number of Clicks:  "+numberOfClicks+".");
+
+        console.log ("I CLICKED A " + el.tagName +" . ");
+
+        
+
+      }
+
+    
+
+    </script>
+
+    
+
+    
+
+    
+
+    <a-scene background="color: #F8EFFB">
+
+      
+
+      <a-entity position="0 0 1">
+
+       	<a-camera wasd-controls look-controls>
+
+                 <a-cursor color="black"></a-cursor>
+
+       	</a-camera>
+
+       </a-entity>
+
+      
+
+      <a-box onclick="alerUser(this)"  id="parentBox" visible="true" position="-3 2 -3" rotation="30 45 0" color="#4CC3D9" shadow>
+
+        <a-box id="childBox" visible="true" position="0 0 0" rotation="0 45 0" color="tomato" shadow></a-box>
+
+      </a-box>
+
+      <a-sphere onclick="alerUser(this)" position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+
+      <a-cylinder onclick="alerUser(this)" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+
+      <a-plane onclick="alerUser(this)" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+
+      <a-tours ></a-tours>
+
+      <a-text value="HELLO" position="-0.5 1.5 -3"></a-text>
+
+ 
+
+    </a-scene>
+
+  </body>
+
+</html>
