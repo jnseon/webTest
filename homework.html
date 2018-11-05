@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, WebVR! • A-Frame</title>
+    <meta name="description" content="Hello, WebVR! • A-Frame">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  </head>
+  <body>
+    
+    <script>
+    
+      var numberOfClicks=0;
+      
+      function alerUser(el){
+        
+        numberOfClicks++;
+        //console.log("HELLO . Number of Clicks:  "+numberOfClicks+".");
+        console.log ("I CLICKED A " + el.tagName +" . ");
+        el.setAttribute('color', 'white');
+        
+      }
+      
+      function makeInvisible(el){
+        
+        el.setAttribute('visible', 'false');
+      
+      }
+      
+      function invisibleCylinder(){
+      
+        var myShape= document.getElementById("disappear");
+        myShape.setAttribute('visible', 'false');
+        
+      }
+      
+      
+      function invisibleObject(myId){
+      
+        var myShape= document.getElementById(myId);
+        myShape.setAttribute('visible', 'false');
+        
+      }
+      
+      var posY=0;
+      
+      function changePosition(myId){
+      
+        var myShape= document.getElementById(myId);
+        myShape.setAttribute('position', {x:0, y:posY, z:-3});
+        posY--;
+      }
+      
+      var yPos = 0.5;
+      var xPos = -1;
+          
+      function changePosition2(element){
+        
+        element.setAttribute('position', {x:xPos, y:yPos, z:-3});
+        yPos= yPos+0.1;
+        xPos= xPos-0.1;
+  
+      }
+      
+      var growX, growY, growZ;
+      growX=1;
+      growY=1;
+      growZ=1;
+      
+      function grow(elem){
+      
+        elem.object3D.scale.set(growX, growY, growY);
+        growX= growX + 0.01;
+        growY= growY + 0.01;
+        growZ= growZ + 0.01;
+      }
+      
+      var shrinkSize=1;
+      
+      function shrink(elem){
+        elem.object3D.scale.set(shrinkSize, shrinkSize, shrinkSize);
+        shrinkSize = shrinkSize - 0.1;
+      }
+      
+      var rotY=0;
+      
+      function rotateY(elem){
+        elem.setAttribute('rotation', {x:0, y:rotY, z:-50}); 
+        rotY= rotY+10;
+      }
+      
+      function visivleTrue(el){
+        var myShape= document.getElementById("ob3");
+        myShape.setAttribute('visible', 'true');
+        
+      
+      }
+    
+    </script>
+    
+    
+    
+    <a-scene background="color: #F8EFFB">
+      
+      <a-entity position="0 0 1">
+       	<a-camera wasd-controls look-controls>
+                 <a-cursor color="black"></a-cursor>
+       	</a-camera>
+       </a-entity>
+      
+      <a-box visible="false" id="ob3"  position="-3 2 -3" rotation="30 45 0" color="#4CC3D9" shadow>
+        <a-box id="ob4;" visible="true" position="0 0 0" rotation="0 45 0" color="tomato" shadow></a-box>
+      </a-box>
+      
+      <a-box color="#8FBFCA" position="-0.8 4 -5" onclick="shrink(this)" scale="2 2 2"></a-box>
+      
+      <a-cone onclick="rotateY(this)" color="#8D7F99" radius-bottom="0.5" radius-top="0" position="3 1 0" scale="1.5 1.5 1.5"></a-cone>
+      
+      <a-sphere id="ob1" onclick="grow(this);" position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+      
+      <a-cylinder id="cyl" onclick="changePosition2(this);" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+      
+      <a-plane id="ob2" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="white" shadow></a-plane>
+      
+      <a-text geometry="primitive:plane" onclick="changePosition('ob1'); visivleTrue(this);" value="HELLO" position="-1 1 -1" color="pink" ></a-text>
+      
+<!--       <a-text geometry="primitive:plane" onclick="invisibleObject('ob1'); invisibleObject('ob2'); changePosition('ob4');" value="HELLO" position="-1 1 -1" color="pink" ></a-text> -->
+
+    </a-scene>
+  </body>
+</html>
