@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello!</title>
+    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  </head>  
+  <body>
+    
+    <a-scene>
+      <a-assets>
+        <img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
+        <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+        <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+        <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
+        <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+ 
+      </a-assets>
+ 
+      <!-- Camera + cursor. -->
+        <a-entity camera look-controls>
+            <a-cursor id="cursor" color="yellow"></a-cursor>
+        </a-entity>
+      
+      <a-box color="#ccc" position="-1 0.5 -2" scale="0.5 0.5 0.5" rotation="45 0 0">
+
+      <a-animation attribute="rotation"
+
+              dur="5000"
+
+              direction= "alternate"
+
+              fill="forwards"
+
+              to="0 360 0"
+
+              repeat="indefinite"
+
+              easing="linear">
+      
+      </a-animation>
+
+        <a-box color="#555" position="0.1 0 1" scale="0.5 0.5 0.5">
+        <a-animation attribute="rotation"
+
+              dur="5000"
+
+              direction= "alternate"
+
+              fill="forwards"
+
+              to="0 360 0"
+
+              repeat="indefinite"
+
+              easing="linear">
+      
+      </a-animation>
+      </a-box>
+      </a-box>
+      
+      <a-cone id="cone" color="#E87C7D" radius-bottom="1" radius-top="0" position="1 1 -4">
+      <a-animation attribute="position"
+              dur="5000"
+              fill="forwards"
+              direction= "normal"
+              to="0 0.2 -0.2"
+              repeat="0"
+              easing="ease-bounce"
+              begin="5000"
+              >
+        </a-animation> 
+      </a-cone>
+      
+      
+    <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#city">
+        <a-animation attribute="material.color" from="black" to="white" dur="1000" begin="fade"></a-animation>
+      </a-sky>
+ 
+      <!--  Image Links. -->
+        <a-text onclick="changeImage('#cubes');" align="center" value="Image 1" position="-4 -1 -4" geometry="primitive:plane"></a-text>
+        <a-text onclick="changeImage('#city');" align="center" value="Image 2" position="-2 -1 -4" geometry="primitive:plane"></a-text>      
+        <a-text onclick="changeImage('#sechelt');" align="center" value="Image 3" position="0 -1 -4" geometry="primitive:plane"></a-text>
+        <a-text value="cone" position="2 -1 -4" geometry="primitive:plane" align="center" ></a-text>
+      
+     
+      
+    </a-scene>
+    
+    <script>
+      
+      function changeImage(imageName){
+        var myImg= document.getElementById("image-360");
+        myImg.setAttribute('src', imageName);    
+        
+        myImg.emit('fade');
+      }
+      
+      
+   
+    
+    </script>
+    
+  </body>
+</html>
