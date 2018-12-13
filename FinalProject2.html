@@ -1,232 +1,110 @@
 <!DOCTYPE html>
-
 <html>
-
   <head>
-
     <meta charset="utf-8">
-
-    <title>360&deg; Image Gallery</title>
-
+    <title>360&deg; Week 11 Image Gallery Example_With_Text</title>
     <meta name="description" content="360&deg; Image Gallery - A-Frame">
-
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-
    
-
   </head>
-
   <body>
-
     <a-scene>
-
-      
-
       <a-assets>
-
-        <img id="city" crossorigin="anonymous" src="img1111.jpeg">
-
+        <img id="city" crossorigin="anonymous" src="webTest/img1111.jpeg">
         <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
-
         <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
-
         <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
-
         <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
-
-        <img id="cubes" crossorigin="anonymous" src="img22222.jpeg">
-
-        <img id="sechelt" crossorigin="anonymous" src="https://201610433.github.io/Image2/bad.jpg">
-
-       
-
+        <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
+        <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
       </a-assets>
-      
-      <a-assets timeout="1">
-        <!-- Multiple source video. -->
-        <video id="video" style="display:none"
-               autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
-          <!-- Native HLS video source. -->
-          <source type="application/x-mpegurl"
-               src="https://cdn.glitch.com/3c75540c-eaff-4599-9386-91482d2a7f43/city_halfres_hls.m3u8?1509419937804" />
-          <!-- MP4 video source. -->
-          <source type="video/mp4"
-               src="https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/" />
-        </video>
-      </a-assets>
-
  
-
-       <!-- 360-degree image. -->
-
-      <a-sky id="image-360_2" radius="10" src="#city"></a-sky>
-
- 
-
       <!-- Camera + cursor. -->
-
-        <a-entity position="0 0 1">
-
-        <a-camera look-controls>
-
-                  <a-cursor color="yellow"></a-cursor>
-
-        </a-camera>
-
-      </a-entity>
-
-       
-
-  <!-- 360-degree image. -->
-
-      <a-sky id="image-360" radius="10" src="#city">
-
-            <a-animation attribute="material.color" from="black" to="white" dur="1000" begin="fade"></a-animation>
-
-      </a-sky>
-
-    
-
+        <a-entity camera look-controls>
+            <a-cursor id="cursor" color="yellow"></a-cursor>
+        </a-entity>
+ 
       
-
+       
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#city">
+       <a-animation attribute="material.color" from="black" to="white" dur="1000" begin="fade"></a-animation>
+      </a-sky>
+      
+      
       <!--  Image Links. -->
-
-          <a-text onclick="changeImage('#city'); showText(image1);" align="center" value="IMAGE1" position="-2 -1 -4" geometry="primitive:circle; radius: 0.6"></a-text>
-
-          <a-text onclick="changeImage('#cubes'); showText(image2);" align="center" value="IMAGE2" position="0 -1 -4" geometry="primitive:circle; radius: 0.6"></a-text>      
-
-          <a-text onclick="changeImage('#sechelt'); showText(video);" align="center" value="VIDEO" position="2 -1 -4" geometry="primitive:circle; radius: 0.6"></a-text>
-
+          <a-text onclick="changeImage('#city'); showText(daejeonText);" align="center" value="Image 1" position="-2 -1 -4" geometry="primitive:plane"></a-text>
+          <a-text onclick="changeImage('#cubes'); showText(geumRiverText);" align="center" value="Image 2" position="0 -1 -4" geometry="primitive:plane"></a-text>      
+          <a-text onclick="changeImage('#sechelt'); showText(kaeryeonMountainText);" align="center" value="Image 3" position="2 -1 -4" geometry="primitive:plane"></a-text>
     
-
       <!--  Text Object for fading.-->
-
-          <a-text id="showText" align="center" color="white" value="Image 1, 2 3" position="0 2.5 -4" opacity="0">
-
+          <a-text id="showText" align="center" color="black" value="Testing 1, 2, 3" position="0 2.5 -4" opacity="0">
               <a-animation attribute="position"
-
                            dur="2000"
-
                            from="0 2.5 -4" 
-
                            to="0 1.75 -4"
-
                            begin="move">
-
               </a-animation>
-
               <a-animation attribute="opacity" dur="1500" begin="fade" to="1">
-
               </a-animation>
-
-            
-
           </a-text>
 
+      
+      
     </a-scene>
-
-    
-
+  
     <script>
+    
+    var daejeonText= `Daejeon is South Korea's fifth-largest metropolis.  
+                      Daejeon had a population of over 1.5 million in 2010. 
+                      Located in the central region of South Korea, 
+                      Daejeon serves as a hub of transportation and is at the crossroads of major transport routes.`;  
+      
+    var geumRiverText= `The Geum River is located in South Korea. 
+                        It is a major river that originates in Jangsu-eup, North Jeolla Province. 
+                        It flows northward through North Jeolla and North Chungcheong Provinces, 
+                        and then changes direction in the vicinity of Greater Daejeon and flows southwest,
+                        through South Chungcheong Province before emptying into the Yellow Sea near Gunsan city.`;
+     
+    var kaeryeonMountainText= `Kaeryong in the region of South Jeolla is a place in South Korea - 
+                              some 187 mi (or 301 km) South of Seoul, the country's capital city.`;
+
 
       
-
-      
-
-    var image1= 'ADL 360 By Fabrice Marre';
-
-            
-
-    var image2= 'View of Seattle and the Great Wheel from Pier 57. Seattle, Washington. - Randy Kosek';
-
-          
-
-    var video= 'It's my vr video. The title is spooky studio. ';
-
-            
-
-      
-
     function changeImage(imageName)
-
       {
-
+        
         //1. Find the sky image element (HTML).
-
         var myImg= document.getElementById("image-360");
-
-      
-
-        //2. Change the image src attribute.
-
-        myImg.setAttribute( 'src' ,imageName);
-
         
-
-        //3. Call the animation for fade in.
-
+        //2.Change the image src attribute.
+        myImg.setAttribute( 'src', imageName);
+        
+        //3.Call the animation for fade in.
         myImg.emit('fade');
-
         
-
       }
-
       
-
     function showText(textContent)
-
       {
-
         //0.Find the textElement
-
         var textElement= document.getElementById("showText");
-
         
-
         //1.Hide the text.
-
         textElement.setAttribute("opacity", "0");
-
         
-
-        //2.Update the 0text value.
-
+        //2.Update the text value.
         textElement.setAttribute("value", textContent);
-
         
-
         //3.Call the fade-in and lowering text animation.
-
         textElement.emit('move');
-
         textElement.emit('fade');
-
+        
       }
-
     
-
-    var animation1= "<a-animation attribute='rotation' dur='3000' "+
-
-                    " fill='forwards' to='0 360 0' "+
-
-                    " repeat='indefinite' easing='linear'></a-animation>"
-
     
+    </script>
 
-    function addAnimation(el)
-
-    {
-
-      el.innerHTML= animation1;
-
-    }
-
-    
-
-    function startAnimation(el)
-
-    {
-
-      el.emit("start");    
-
-    }  
+  
+  </body>
+</html>
