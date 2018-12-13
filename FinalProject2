@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <title>360&deg; Image Gallery</title>
+
+    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+
+   
+
+  </head>
+
+  <body>
+
+    <a-scene>
+
+      
+
+      <a-assets>
+
+        <img id="city" crossorigin="anonymous" src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.nwdastore.com%2Fwp-content%2Fuploads%2F2016%2F11%2FADL360right_fog.jpg&f=1">
+
+        <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+
+        <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+
+        <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+
+        <img id="cubes" crossorigin="anonymous" src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fventurebeat.com%2Fwp-content%2Fuploads%2F2017%2F06%2F1strandykosekseattlewaterfrontatdusk.jpg%3Ffit%3D3500%252C1750%26strip%3Dall&f=1">
+
+        <img id="sechelt" crossorigin="anonymous" src="https://201610433.github.io/Image2/bad.jpg">
+
+       
+
+      </a-assets>
+      
+      <a-assets timeout="1">
+        <!-- Multiple source video. -->
+        <video id="video" style="display:none"
+               autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
+          <!-- Native HLS video source. -->
+          <source type="application/x-mpegurl"
+               src="https://cdn.glitch.com/3c75540c-eaff-4599-9386-91482d2a7f43/city_halfres_hls.m3u8?1509419937804" />
+          <!-- MP4 video source. -->
+          <source type="video/mp4"
+               src="https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/" />
+        </video>
+      </a-assets>
+
+ 
+
+       <!-- 360-degree image. -->
+
+      <a-sky id="image-360_2" radius="10" src="#city"></a-sky>
+
+ 
+
+      <!-- Camera + cursor. -->
+
+        <a-entity position="0 0 1">
+
+        <a-camera look-controls>
+
+                  <a-cursor color="yellow"></a-cursor>
+
+        </a-camera>
+
+      </a-entity>
+
+       
+
+  <!-- 360-degree image. -->
+
+      <a-sky id="image-360" radius="10" src="#city">
+
+            <a-animation attribute="material.color" from="black" to="white" dur="1000" begin="fade"></a-animation>
+
+      </a-sky>
+
+    
+
+      
+
+      <!--  Image Links. -->
+
+          <a-text onclick="changeImage('#city'); showText(image1);" align="center" value="IMAGE1" position="-2 -1 -4" geometry="primitive:circle; radius: 0.6"></a-text>
+
+          <a-text onclick="changeImage('#cubes'); showText(image2);" align="center" value="IMAGE2" position="0 -1 -4" geometry="primitive:circle; radius: 0.6"></a-text>      
+
+          <a-text onclick="changeImage('#sechelt'); showText(video);" align="center" value="VIDEO" position="2 -1 -4" geometry="primitive:circle; radius: 0.6"></a-text>
+
+    
+
+      <!--  Text Object for fading.-->
+
+          <a-text id="showText" align="center" color="white" value="Image 1, 2 3" position="0 2.5 -4" opacity="0">
+
+              <a-animation attribute="position"
+
+                           dur="2000"
+
+                           from="0 2.5 -4" 
+
+                           to="0 1.75 -4"
+
+                           begin="move">
+
+              </a-animation>
+
+              <a-animation attribute="opacity" dur="1500" begin="fade" to="1">
+
+              </a-animation>
+
+            
+
+          </a-text>
+
+    </a-scene>
+
+    
+
+    <script>
+
+      
+
+      
+
+    var image1= 'ADL 360 By Fabrice Marre';
+
+            
+
+    var image2= 'View of Seattle and the Great Wheel from Pier 57. Seattle, Washington. - Randy Kosek';
+
+          
+
+    var video= 'It's my vr video. The title is spooky studio. ';
+
+            
+
+      
+
+    function changeImage(imageName)
+
+      {
+
+        //1. Find the sky image element (HTML).
+
+        var myImg= document.getElementById("image-360");
+
+      
+
+        //2. Change the image src attribute.
+
+        myImg.setAttribute( 'src' ,imageName);
+
+        
+
+        //3. Call the animation for fade in.
+
+        myImg.emit('fade');
+
+        
+
+      }
+
+      
+
+    function showText(textContent)
+
+      {
+
+        //0.Find the textElement
+
+        var textElement= document.getElementById("showText");
+
+        
+
+        //1.Hide the text.
+
+        textElement.setAttribute("opacity", "0");
+
+        
+
+        //2.Update the 0text value.
+
+        textElement.setAttribute("value", textContent);
+
+        
+
+        //3.Call the fade-in and lowering text animation.
+
+        textElement.emit('move');
+
+        textElement.emit('fade');
+
+      }
+
+    
+
+    var animation1= "<a-animation attribute='rotation' dur='3000' "+
+
+                    " fill='forwards' to='0 360 0' "+
+
+                    " repeat='indefinite' easing='linear'></a-animation>"
+
+    
+
+    function addAnimation(el)
+
+    {
+
+      el.innerHTML= animation1;
+
+    }
+
+    
+
+    function startAnimation(el)
+
+    {
+
+      el.emit("start");    
+
+    }  
