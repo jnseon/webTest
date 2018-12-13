@@ -1,0 +1,158 @@
+
+        <a-entity position="-0.5 0.5 -0.5" scale="0.6 1.2 1" text-geometry="value: VAPORWAVE; font: #exoFont; bevelEnabled: true; bevelSize: 0.1; bevelThickness: 0.1; curveSegments: 1; size: 1.5; height: 0.5;" material="color:pink; metalness:0.9; roughness: 0.05; sphericalEnvMap: #chrome;"></a-entity>
+
+        <a-entity position="1 0 0.3" text-geometry="value: Aesthetic; font: #exoItalicFont; style: italic; size: 0.8; weight: bold; height: 0;"
+                  material="shader: flat; color: white"></a-entity>
+        <a-entity position="1 0 0.3" text-geometry="value: Aesthetic; font: #exoItalicFont; style: italic; size: 0.8; weight: bold; height: 0; bevelEnabled: true; bevelSize: 0.04; bevelThickness: 0.04; curveSegments: 1"
+                  material="shader: flat; color: white; transparent: true; opacity: 0.4"></a-entity>
+      
+<!-- By Ada Rose Edwards @lady_ada_king. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vaporwave - A-Frame</title>
+    <meta name="description" content="Vaporwave aesthetic text By Ada Rose Edwards (@lady_ada_king).">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      
+      <a-camera look-controls>
+
+                  <a-cursor color="white"></a-cursor>
+
+        </a-camera>
+      
+      <a-assets>
+        <img id="pink" src="https://img.gs/bbdkhfbzkk/stretch/http://i.imgur.com/1hyyIUi.jpg" crossorigin="anonymous" />
+        <img src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" id="grid" crossorigin="anonymous">
+        <img src="https://img.gs/bbdkhfbzkk/2048x1024,stretch/http://i.imgur.com/WMNH2OF.jpg" id="chrome" crossorigin="anonymous">
+        <img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
+        <a-asset-item id="dawningFont" src="https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2FdawningOfANewDayRegular.typeface.json?1490305922844"></a-asset-item>
+        <a-asset-item id="exoFont" src="https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2Black.typeface.json?1490305922150"></a-asset-item>
+        <a-asset-item id="exoItalicFont" src="https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2BlackItalic.typeface.json?1490305922725"></a-asset-item>
+      </a-assets>
+
+      <a-entity scale="2 2 2" geometry="primitive: torusKnot" position="0 6 -10" material="color: magenta; metalness:1; roughness: 0.1; sphericalEnvMap: #sky;">
+        <a-animation easing="linear" attribute="rotation" dur="10000" to="0 0 360" repeat="indefinite"></a-animation>
+      </a-entity>
+
+      <a-entity position="-3 1 -6" rotation="5 0 0">
+        <a-entity
+          rotation="0 0 0"
+          position="0 2 0.2"
+          text-geometry="value: JINSEON; font: #dawningFont; bevelEnabled: true; bevelSize: 0.1; bevelThickness: 0.1; curveSegments: 12; size: 1; height: 0;"
+          material="color:lavenderblush; metalness:1; roughness: 0; sphericalEnvMap: #pink;"
+                  ></a-entity></a-entity>
+
+      <a-entity
+        geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
+        material="src: #grid; repeat: 10000 10000; transparent: true;metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"></a-entity>
+
+      <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
+      <a-entity light="color: ffaaff; intensity: 1.5" position="5 5 5"></a-entity>
+      <a-entity light="color: white; intensity: 0.5" position="-5 5 15"></a-entity>
+      <a-entity light="color: white; type: ambient;"></a-entity>
+      
+      
+      <a-box scale="1 1 1" material="color: #7B75A2; metalness:0.7; roughness: 0.1; sphericalEnvMap: #sky;" position="-6 5 -8">
+        <a-animation easing="linear" attribute="rotation" dur="20000" to="0 0 360"></a-animation>
+        <a-animation attribute="visible" begin="5000" to="false"></a-animation>
+      </a-box>
+      <a-box scale="1 1 1" material="color: #7B75A2; metalness:0.7; roughness: 0.1; sphericalEnvMap: #sky;" position="6 5 -8">
+        <a-animation easing="linear" attribute="rotation" dur="20000" to="0 0 360"></a-animation>
+        <a-animation attribute="visible" begin="5000" to="false"></a-animation>
+      </a-box>
+      
+     
+      <a-entity visible="false" scale="2 2 2" geometry="primitive: sphere" position="0 1 -10" material="color: #7B75A2; metalness:0.7; roughness: 0.1; sphericalEnvMap: #sky;">
+        <a-animation attribute="position" begin="3000" dur="2000" from="0 1 -10" to="0 1 -70" repeat="indefinite" ></a-animation>
+        <a-animation attribute="visible" begin="3000" to="true" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="5000" to="false" repeat="indefinite"></a-animation>
+      </a-entity>
+      
+      <a-entity visible="false" scale="1 1 1" geometry="primitive: sphere" position="-3 1 -10" material="color: #7B75A2; metalness:0.7; roughness: 0.1; sphericalEnvMap: #sky;">
+        <a-animation attribute="position" begin="1000" dur="2000" from="-3 1 -10" to="-3 1 -80" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="1000" to="true" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="3000" to="false" repeat="indefinite"></a-animation>
+      </a-entity>
+      
+      <a-entity visible="false" scale="1.5 1.5 1.5" geometry="primitive: sphere" position="3 1 -10" material="color: #7B75A2; metalness:0.7; roughness: 0.1; sphericalEnvMap: #sky;">
+        <a-animation attribute="position" begin="7000" dur="2000" from="3 1 -10" to="3 1 -70" repeat="indefinite" ></a-animation>
+        <a-animation attribute="visible" begin="7000" to="true" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="9000" to="false" repeat="indefinite"></a-animation>
+      </a-entity>
+      
+      <a-entity visible="false" scale="2 2 2" geometry="primitive: sphere" position="-5 -1 -10" material="color: #7B75A2; metalness:0.7; roughness: 0.1; sphericalEnvMap: #sky;">
+        <a-animation attribute="position" begin="2000" dur="2000" from="-5 -1 -10" to="-5 -1 -70" repeat="indefinite" ></a-animation>
+        <a-animation attribute="visible" begin="2000" to="true" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="4000" to="false" repeat="indefinite"></a-animation>
+      </a-entity>
+      
+      <a-entity visible="false" scale="2 2 2" geometry="primitive: sphere" position="5 -1 -10" material="color: #7B75A2; metalness:0.7; roughness: 0.1; sphericalEnvMap: #sky;">
+        <a-animation attribute="position" begin="5000" dur="2000" from="5 -1 -10" to="5 -1 -80" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="5000" to="true" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="7000" to="false" repeat="indefinite"></a-animation>
+      </a-entity>
+      
+      <a-entity visible="false" scale="1 1 1" geometry="primitive: sphere" position="-4.5 -2 -10" material="color: #7B75A2; metalness:0.7; roughness: 0.1; sphericalEnvMap: #sky;">
+        <a-animation attribute="position" begin="4000" dur="2000" from="-4.5 -2 -10" to="-4.5 -2 -80" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="4000" to="true" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="6000" to="false" repeat="indefinite"></a-animation>
+      </a-entity>
+      
+      <a-entity visible="false" scale="1 1 1" geometry="primitive: sphere" position="4.5 -2 -10" material="color: #7B75A2; metalness:0.7; roughness: 0.1; sphericalEnvMap: #sky;">
+        <a-animation attribute="position" begin="6000" dur="2000" from="4.5 -2 -10" to="4.5 -2 -70" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="6000" to="true" repeat="indefinite"></a-animation>
+        <a-animation attribute="visible" begin="8000" to="false" repeat="indefinite"></a-animation>
+      </a-entity>
+      
+       <a-text onclick="showText(finalproject);" align="center" value="HI" position="-5 3 -4" geometry="primitive:plane"></a-text>
+      
+      <a-text  align="center" value="SPOOKY" position="5 3 -4" geometry="primitive:plane"></a-text>
+      
+      <a-text id="showText" align="center" color="white" value="Testing 1" position="0 2.5 -4" opacity="0">
+              <a-animation attribute="position"
+                           dur="2000"
+                           from="0 2.5 -4" 
+                           to="0 1.75 -4"
+                           begin="move">
+              </a-animation>
+              <a-animation attribute="opacity" dur="1500" begin="fade" to="1">
+              </a-animation>
+          </a-text>
+      
+      <a-sky src="#sky" rotation="0 -90 0"></a-sky>
+        
+    </a-scene>
+    
+    
+    <script>
+    
+      var finalproject= `HELLO, I AM JEONG JINSEON AND THIS IS MY FINAL PROJECT. 
+                  THANK YOU`;
+      
+      function showText(textContent)
+      {
+        //0.Find the textElement
+        var textElement= document.getElementById("showText");
+        
+        //1.Hide the text.
+        textElement.setAttribute("opacity", "0");
+        
+        //2.Update the text value.
+        textElement.setAttribute("value", textContent);
+        
+        //3.Call the fade-in and lowering text animation.
+        textElement.emit('move');
+        textElement.emit('fade');
+        
+      }
+    
+    
+    
+    
+    </script>
+  </body>
+</html>
