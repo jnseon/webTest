@@ -2,109 +2,60 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>360&deg; Week 11 Image Gallery Example_With_Text</title>
+    <title>360&deg; Image Gallery</title>
     <meta name="description" content="360&deg; Image Gallery - A-Frame">
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-   
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+    <script src="components/set-image.js"></script>
   </head>
   <body>
     <a-scene>
       <a-assets>
-        <img id="city" crossorigin="anonymous" src="img1111.jpeg">
+        <img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
         <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
         <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
         <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
         <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
         <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
         <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+
+        <!-- Image link template to be reused. -->
+        <script id="link" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; height: 1; width: 1"
+            material="shader: flat; src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
       </a-assets>
- 
-      <!-- Camera + cursor. -->
-        <a-entity camera look-controls>
-            <a-cursor id="cursor" color="yellow"></a-cursor>
-        </a-entity>
- 
-      
-       
+
       <!-- 360-degree image. -->
-      <a-sky id="image-360" radius="10" src="#city">
-       <a-animation attribute="material.color" from="black" to="white" dur="1000" begin="fade"></a-animation>
-      </a-sky>
-      
-      
-      <!--  Image Links. -->
-          <a-text onclick="changeImage('#city'); showText(daejeonText);" align="center" value="Image 1" position="-2 -1 -4" geometry="primitive:plane"></a-text>
-          <a-text onclick="changeImage('#cubes'); showText(geumRiverText);" align="center" value="Image 2" position="0 -1 -4" geometry="primitive:plane"></a-text>      
-          <a-text onclick="changeImage('#sechelt'); showText(kaeryeonMountainText);" align="center" value="Image 3" position="2 -1 -4" geometry="primitive:plane"></a-text>
-    
-      <!--  Text Object for fading.-->
-          <a-text id="showText" align="center" color="black" value="Testing 1, 2, 3" position="0 2.5 -4" opacity="0">
-              <a-animation attribute="position"
-                           dur="2000"
-                           from="0 2.5 -4" 
-                           to="0 1.75 -4"
-                           begin="move">
-              </a-animation>
-              <a-animation attribute="opacity" dur="1500" begin="fade" to="1">
-              </a-animation>
-          </a-text>
+      <a-sky id="image-360" radius="10" src="#city"></a-sky>
 
-      
-      
+      <!-- Image links. -->
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
+      </a-entity>
+
+      <!-- Camera + cursor. -->
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          fuse="true"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
     </a-scene>
-  
-    <script>
-    
-    var daejeonText= `Daejeon is South Korea's fifth-largest metropolis.  
-                      Daejeon had a population of over 1.5 million in 2010. 
-                      Located in the central region of South Korea, 
-                      Daejeon serves as a hub of transportation and is at the crossroads of major transport routes.`;  
-      
-    var geumRiverText= `The Geum River is located in South Korea. 
-                        It is a major river that originates in Jangsu-eup, North Jeolla Province. 
-                        It flows northward through North Jeolla and North Chungcheong Provinces, 
-                        and then changes direction in the vicinity of Greater Daejeon and flows southwest,
-                        through South Chungcheong Province before emptying into the Yellow Sea near Gunsan city.`;
-     
-    var kaeryeonMountainText= `Kaeryong in the region of South Jeolla is a place in South Korea - 
-                              some 187 mi (or 301 km) South of Seoul, the country's capital city.`;
-
-
-      
-    function changeImage(imageName)
-      {
-        
-        //1. Find the sky image element (HTML).
-        var myImg= document.getElementById("image-360");
-        
-        //2.Change the image src attribute.
-        myImg.setAttribute( 'src', imageName);
-        
-        //3.Call the animation for fade in.
-        myImg.emit('fade');
-        
-      }
-      
-    function showText(textContent)
-      {
-        //0.Find the textElement
-        var textElement= document.getElementById("showText");
-        
-        //1.Hide the text.
-        textElement.setAttribute("opacity", "0");
-        
-        //2.Update the text value.
-        textElement.setAttribute("value", textContent);
-        
-        //3.Call the fade-in and lowering text animation.
-        textElement.emit('move');
-        textElement.emit('fade');
-        
-      }
-    
-    
-    </script>
-
-  
   </body>
 </html>
